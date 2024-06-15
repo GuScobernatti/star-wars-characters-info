@@ -1,0 +1,38 @@
+header {
+  width: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  a {
+    color: $color-white;
+    list-style: none;
+    text-decoration: none;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 100px;
+      }
+    }
+  }
+
+  div:last-child {
+    display: flex;
+    gap: 15px;
+
+    i {
+      color: $color-white;
+      font-size: 20px;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $primary;
+        transform: scale(1.05);
+      }
+    }
+  }
+}

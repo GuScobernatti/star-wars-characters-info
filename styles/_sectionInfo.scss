@@ -1,0 +1,68 @@
+#dark-overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#dark-overlay.active {
+  display: block;
+}
+
+#sectionInfoPeople.active {
+  display: flex;
+}
+
+#sectionInfoPeople.active + #dark-overlay {
+  display: block;
+}
+
+#sectionInfoPeople {
+  display: none;
+  background-color: black;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 450px;
+  color: $primary;
+  border-radius: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  #character-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-position: 50% 10%;
+    background-size: cover;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #sectionInfoPeople {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #sectionInfoPeople {
+    width: 70%;
+  }
+}
