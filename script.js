@@ -1,8 +1,8 @@
-let urlAPiStarWars = `https://swapi.dev/api/people/`;
+let urlRickAndMorty = `https://rickandmortyapi.com/api/character`;
 window.onload = async () => {
   try {
     document.body.classList.add("loading");
-    await fetchApi(urlAPiStarWars);
+    await fetchApi(urlRickAndMorty);
     document.body.classList.remove("loading");
   } catch (error) {
     console.error(error);
@@ -14,6 +14,7 @@ async function fetchApi(url) {
     const response = await fetch(url);
     const data = await response.json();
     const dataResult = data.results;
+    console.log(data);
 
     const section = document.querySelector(".section1");
     section.innerHTML = "";
@@ -22,29 +23,22 @@ async function fetchApi(url) {
       section.innerHTML += `<div
       class="cards"
       style="
-      background-image: url(https://starwars-visualguide.com/assets/img/characters/${element.url.replace(
-        /\D/g,
-        ""
-      )}.jpg);" onclick="showModal('${element.url.replace(/\D/g, "")}', '${
-        element.name
-      }', '${element.height}', '${element.mass}', '${element.eye_color}', '${
-        element.birth_year
-      }')">
+      background-image: url(${element.image});" onclick="showModal('${element.image}', '${element.name}', '${element.gender}', '${element.status}', '${element.species}', '${element.origin.name}')">
         <div class="name-bg">
         <span class="character-name">${element.name}</span>
         </div>
         </div>`;
     });
 
-    urlAPiStarWars = url;
+    urlRickAndMorty = url;
     const btnNext = document.getElementById("btnNext");
     const btnBack = document.getElementById("btnBack");
 
-    data.previous === null
+    data.info.prev === null
       ? btnBack.classList.add("hidden")
       : btnBack.classList.remove("hidden");
 
-    data.next === null
+    data.info.next === null
       ? btnNext.classList.add("hidden")
       : btnNext.classList.remove("hidden");
   } catch (error) {
@@ -57,9 +51,9 @@ const btnNext = document.getElementById("btnNext");
 const nextPage = async () => {
   try {
     document.body.classList.add("loading");
-    const response = await fetch(urlAPiStarWars);
+    const response = await fetch(urlRickAndMorty);
     const data = await response.json();
-    await fetchApi(data.next);
+    await fetchApi(data.info.next);
     document.body.classList.remove("loading");
   } catch (error) {
     console.error(error);
@@ -73,9 +67,9 @@ const btnBack = document.getElementById("btnBack");
 const backPage = async () => {
   try {
     document.body.classList.add("loading");
-    const response = await fetch(urlAPiStarWars);
+    const response = await fetch(urlRickAndMorty);
     const data = await response.json();
-    await fetchApi(data.previous);
+    await fetchApi(data.info.prev);
     document.body.classList.remove("loading");
   } catch (error) {
     console.error(error);
@@ -90,47 +84,47 @@ const darkOverlay = document.getElementById("dark-overlay");
 const characterImage = document.getElementById("character-image");
 const container = document.querySelector(".container");
 const spanName = document.createElement("span");
-const spanHeight = document.createElement("span");
-const spanWeight = document.createElement("span");
-const spanEyeColor = document.createElement("span");
-const spanBirth = document.createElement("span");
+const spanGender = document.createElement("span");
+const spanStatus = document.createElement("span");
+const spanSpecies = document.createElement("span");
+const spanOrigin = document.createElement("span");
 
 const showModal = (
   elementImage,
   elementName,
-  elementHeight,
-  elementWeight,
-  elementEyeColor,
-  elementBirth
+  elementGender,
+  elementStatus,
+  elementSpecies,
+  elementOrigin
 ) => {
   sectionInfoPeople.classList.add("active");
   darkOverlay.classList.add("active");
 
-  characterImage.style.backgroundImage = `url(https://starwars-visualguide.com/assets/img/characters/${elementImage}.jpg`;
+  characterImage.style.backgroundImage = `url(${elementImage}`;
   spanName.textContent = `Nome: ${elementName}`;
-  spanHeight.textContent = `Altura: ${elementHeight / 100}`;
-  spanWeight.textContent = `Massa: ${elementWeight} KG`;
-  spanEyeColor.textContent = `Cor dos olhos: ${elementEyeColor}`;
-  spanBirth.textContent = `Nascimento: ${elementBirth}`;
+  spanGender.textContent = `Gênero: ${elementGender}`;
+  spanStatus.textContent = `Status: ${elementStatus}`;
+  spanSpecies.textContent = `Espécie: ${elementSpecies}`;
+  spanOrigin.textContent = `Origem: ${elementOrigin}`;
 
   if (sectionInfoPeople.classList.contains("active")) {
     container.appendChild(spanName);
-    container.appendChild(spanHeight);
-    container.appendChild(spanWeight);
-    container.appendChild(spanEyeColor);
-    container.appendChild(spanBirth);
+    container.appendChild(spanGender);
+    container.appendChild(spanStatus);
+    container.appendChild(spanSpecies);
+    container.appendChild(spanOrigin);
   } else {
     container.innerHTML = "";
     container.appendChild(spanName);
-    container.appendChild(spanHeight);
-    container.appendChild(spanWeight);
-    container.appendChild(spanEyeColor);
-    container.appendChild(spanBirth);
+    container.appendChild(spanGender);
+    container.appendChild(spanStatus);
+    container.appendChild(spanSpecies);
+    container.appendChild(spanOrigin);
     spanName.textContent = "";
-    spanHeight.textContent = "";
-    spanWeight.textContent = "";
-    spanEyeColor.textContent = "";
-    spanBirth.textContent = "";
+    spanGender.textContent = "";
+    spanStatus.textContent = "";
+    spanSpecies.textContent = "";
+    spanOrigin.textContent = "";
   }
 };
 
@@ -140,22 +134,22 @@ darkOverlay.addEventListener("click", () => {
 
   if (!sectionInfoPeople.classList.contains("invisible")) {
     container.appendChild(spanName);
-    container.appendChild(spanHeight);
-    container.appendChild(spanWeight);
-    container.appendChild(spanEyeColor);
-    container.appendChild(spanBirth);
+    container.appendChild(spanGender);
+    container.appendChild(spanStatus);
+    container.appendChild(spanSpecies);
+    container.appendChild(spanOrigin);
   } else {
     container.innerHTML = "";
     container.appendChild(spanName);
-    container.appendChild(spanHeight);
-    container.appendChild(spanWeight);
-    container.appendChild(spanEyeColor);
-    container.appendChild(spanBirth);
+    container.appendChild(spanGender);
+    container.appendChild(spanStatus);
+    container.appendChild(spanSpecies);
+    container.appendChild(spanOrigin);
     spanName.textContent = "";
-    spanHeight.textContent = "";
-    spanWeight.textContent = "";
-    spanEyeColor.textContent = "";
-    spanBirth.textContent = "";
+    spanGender.textContent = "";
+    spanStatus.textContent = "";
+    spanSpecies.textContent = "";
+    spanOrigin.textContent = "";
   }
 });
 

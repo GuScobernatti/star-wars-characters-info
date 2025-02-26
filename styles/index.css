@@ -29,7 +29,7 @@ header div:last-child i {
   transition: all 0.2s;
 }
 header div:last-child i:hover {
-  color: gold;
+  color: rgb(20, 163, 20);
   transform: scale(1.05);
 }
 
@@ -64,7 +64,7 @@ header div:last-child i:hover {
   justify-content: center;
   width: 25%;
   height: 450px;
-  color: gold;
+  color: rgb(20, 163, 20);
   border-radius: 15px;
   position: fixed;
   top: 50%;
@@ -186,7 +186,7 @@ main {
   margin-top: 50px;
 }
 main h2 {
-  color: gold;
+  color: rgb(20, 163, 20);
   font-weight: 300;
   margin-bottom: 50px;
   text-align: center;
@@ -226,7 +226,7 @@ main .section1 .cards .name-bg {
   border-radius: 10px;
 }
 main .section1 .cards .name-bg .character-name {
-  color: gold;
+  color: rgb(20, 163, 20);
   font-size: 1rem;
 }
 main .section2 {
@@ -238,7 +238,7 @@ main .section2 {
 main .section2 button {
   font-family: sans-serif;
   cursor: pointer;
-  background-color: gold;
+  background-color: rgb(20, 163, 20);
   color: black;
   padding: 5px;
   border-radius: 5px;
